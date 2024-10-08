@@ -58,6 +58,29 @@ void insert_End(){
     temp->link=new;
     return;
 }
+void insert_AfterData(){
+    struct node* temp=start;
+    struct node* new;
+    int data;
+    int data_check;
+    printf("Enter the information to be stored in node(at index): ");
+    scanf("%d",&data);
+    printf("Enter the data after which you want to add: ");
+    scanf("%d",&data_check);
+
+    while(temp->info!=data_check && temp->link!=NULL){
+        temp=temp->link;
+    }
+    if(temp==NULL){
+        printf("Underflow");
+        return;
+    }
+    new=create_node(data);
+    new->link=temp->link;
+    temp->link=new;
+    return;
+}
+
 void delete_Begn(){
     struct node* tobedel=start;
     if(tobedel==NULL){
@@ -101,8 +124,7 @@ int main(){
     insert_Begn();
     insert_End();
     traverse();
-    delete_Begn();
-    delete_End();
+    insert_AfterData();
     traverse();
     return 0;
 }
