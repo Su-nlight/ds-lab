@@ -63,7 +63,7 @@ void insert_AfterData(){
     struct node* new;
     int data;
     int data_check;
-    printf("Enter the information to be stored in node(at index): ");
+    printf("Enter the information to be stored in node(at End): ");
     scanf("%d",&data);
     printf("Enter the data after which you want to add: ");
     scanf("%d",&data_check);
@@ -118,13 +118,24 @@ void traverse(){
     }
 }
 int main(){
-    create();
-    insert_Begn();
-    insert_End();
-    insert_Begn();
-    insert_End();
-    traverse();
-    insert_AfterData();
-    traverse();
+    int flag=1,choice;
+    printf("menu");
+    do
+    {
+        printf("Enter the coice from menu: ");
+        scanf("%d",&choice);
+        switch(choice){
+            case(1):create();
+            case(2): insert_Begn();
+            case(3): insert_End();
+            case(4): insert_AfterData();
+            case(5): delete_Begn();
+            case(6): delete_End();
+            case(7): traverse();
+            case(8): flag=0;
+            default: printf("Invalid choice.");
+        }
+    } while(flag=1);
+    
     return 0;
 }
