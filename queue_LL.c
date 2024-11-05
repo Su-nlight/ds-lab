@@ -6,7 +6,8 @@ struct node
         int info;
         struct node *link;
 };
-struct node* start=NULL;
+struct node* front=NULL;
+struct node* rear=NULL;
 
 struct node* create_node(int data){
     struct node* ptr;
@@ -27,37 +28,36 @@ void Enqueue(){
     scanf("%d",&data);
     new = create_node(data);
     if(new==NULL){ return;}
-    if(start==NULL){
-        start=new;
-        return;
-    }
-    //else traverse to last 
-    struct node* temp=start;
-    while(temp->link!=NULL){
-        temp=temp->link;
-    }
-    temp->link=new;
-    return;
-}
-
-void Dequeue(){
-    struct node* tobedel=start;
-    if(tobedel==NULL){
-        printf("Underflow");
+    if(rear==NULL){
+        front=rear=new;
         return;
     }
     else{
-        start=tobedel->link;
-        printf("Data in node is: %d",tobedel->info);
-        free(tobedel);
+        rear->link=new;
+        rear=new;
+        return;
     }
+}
+
+void Dequeue(){
+    if(front==NULL){
+        printf("Underflow");
+        return;
+    }
+    struct node* tobedel=front;
+    printf("Data in node is: %d",tobedel->info);
+    front=tobedel->link;
+    if(front==NULL){
+        rear=NULL;
+    }
+    free(tobedel);
     
 }
 
 void traverse(){
     struct node* ptr;
     int nodeno=0;
-    for(ptr=start; ptr!=NULL; ptr=ptr->link,nodeno++){
+    for(ptr=front; ptr!=NULL; ptr=ptr->link,nodeno++){
         printf("Node no.%d has info = %d \n", nodeno+1, ptr->info);
     }
 }
