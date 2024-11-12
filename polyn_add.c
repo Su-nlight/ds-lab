@@ -10,12 +10,12 @@ struct node
 struct node* start_poly1=NULL;
 struct node* start_poly2=NULL;
 
-struct Node *insertEnd(struct Node *HEAD, struct Node *newNode) {
+struct node *insertEnd(struct node *HEAD, struct node *newNode) {
 
   if (HEAD == NULL)
     return newNode;
 
-  struct Node *ptr = HEAD;
+  struct node *ptr = HEAD;
 
   while (ptr->link != NULL)
     ptr = ptr->link;
@@ -27,11 +27,11 @@ struct Node *insertEnd(struct Node *HEAD, struct Node *newNode) {
 }
 
 struct node *create(){
-    struct Node *HEAD = NULL;
+    struct node *HEAD = NULL;
 
   while (1) {
 
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node *));
+    struct node *newNode = (struct node *)malloc(sizeof(struct node *));
 
     printf("Enter the coefficient: ");
     scanf("%d", &newNode->coefficient);
@@ -48,13 +48,13 @@ struct node *create(){
     if (choice == 0) return HEAD;
     }
 }
-struct Node *add(struct Node *first, struct Node *second) {
+struct node *add(struct node *first, struct node *second) {
 
-  struct Node *HEAD = NULL;
+  struct node *HEAD = NULL;
 
   while (first != NULL && second != NULL) {
 
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node *));
+    struct node *newNode = (struct node *)malloc(sizeof(struct node *));
 
     if (first->exponent > second->exponent) {
 
@@ -84,7 +84,7 @@ struct Node *add(struct Node *first, struct Node *second) {
 
   while (first != NULL || second != NULL) {
 
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node *));
+    struct node *newNode = (struct node *)malloc(sizeof(struct node *));
 
     if (first != NULL) {
 
@@ -109,14 +109,13 @@ struct Node *add(struct Node *first, struct Node *second) {
 
 void traverse(struct node *polyn){
     struct node* ptr=polyn;
-    for(ptr=start; ptr!=NULL; ptr=ptr->link){
-        printf(" + %d^%d", ptr->base, ptr->exponent);
+    for(; ptr!=NULL; ptr=ptr->link){
+        printf(" + %d .x^%d", ptr->coefficient, ptr->exponent);
     }
-    printf("\n")
+    printf("\n");
 }
 
 int main(){
-    int flag=1,choice;
 
     printf("Enter the First polynomial: ");
     start_poly1 = create();
@@ -128,7 +127,7 @@ int main(){
     printf("\nThe second polynomial is: ");
     traverse(start_poly2);
 
-    traverse(add(start_poly1, start_poly2))
+    traverse(add(start_poly1, start_poly2));
     
     return 0;
 }
