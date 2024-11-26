@@ -3,13 +3,13 @@
 
 struct Node {
     int data;
-    struct node* left;
-    struct node* right;
-}
+    struct Node* left;
+    struct Node* right;
+};
 
 struct Node* create_node(int data){
     struct Node* new = (struct Node*)malloc(sizeof(struct Node));
-    if (new == Null){
+    if (new == NULL){
         printf("Overflow");
         return NULL;
     }
@@ -48,7 +48,25 @@ void postorder_traversal(struct Node* node){
 void main() {
     int flag=1, choice;
     printf("Menu: \n");
+    printf("1. inorder traversal\n");
+    printf("2. preorder traversal\n");
+    printf("3. postorder traversal\n");
+    printf("4. exit\n");
+    //example graph
+    struct Node* root = create_node(1);
+    root->left = create_node(2);
+    root->right = create_node(3);
+    root->left->left = create_node(4);
+    root->left->right = create_node(5);
     do{
-        
-    }while(flag)
+        printf("\nEnter the choice from menu: ");
+        scanf("%d",&choice);
+        switch(choice){
+            case(1): {inorder_traversal(root);break;}
+            case(2): {preorder_traversal(root);break;}
+            case(3): {postorder_traversal(root);break;}
+            case(4): {flag=0;break;}
+            default: {printf("Invalid choice.");break;}
+        }
+    }while(flag);
 }
