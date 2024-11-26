@@ -48,6 +48,10 @@ void postorder_traversal(struct Node* node){
 void main() {
     int flag=1, choice;
     printf("Menu: \n");
+    printf("1. inorder traversal\n");
+    printf("2. preorder traversal\n");
+    printf("3. postorder traversal\n");
+    printf("4. exit\n");
     //example graph
     struct Node* root = create_node(1);
     root->left = create_node(2);
