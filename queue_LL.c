@@ -1,81 +1,68 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct node
-{
-        int info;
-        struct node *link;
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
 };
-struct node* front=NULL;
-struct node* rear=NULL;
 
-struct node* create_node(int data){
-    struct node* ptr;
-    ptr=(struct node*) malloc(sizeof(struct node));
-    if(ptr==NULL){
+struct Node* create_node(int data){
+    struct Node* new = (struct Node*)malloc(sizeof(struct Node));
+    if (new == NULL){
         printf("Overflow");
         return NULL;
     }
-    ptr->link=NULL;
-    ptr->info=data;
-    return ptr;
+    new->data = data;
+    new->left = new->right = NULL;
+    return new;
 }
 
-void Enqueue(){
-    struct node* new;
-    int data;
-    printf("Enter the information to be stored in queue: ");
-    scanf("%d",&data);
-    new = create_node(data);
-    if(new==NULL){ return;}
-    if(rear==NULL){
-        front=rear=new;
+void inorder_traversal(struct Node* node){
+    if( node == NULL ){
         return;
     }
-    else{
-        rear->link=new;
-        rear=new;
-        return;
-    }
+    inorder_traversal(node->left);
+    printf("%d  ", node->data);
+    inorder_traversal(node->right);
 }
 
-void Dequeue(){
-    if(front==NULL){
-        printf("Underflow");
+void preorder_traversal(struct Node* node){
+    if( node == NULL ){
         return;
     }
-    struct node* tobedel=front;
-    printf("Data in node is: %d",tobedel->info);
-    front=tobedel->link;
-    if(front==NULL){
-        rear=NULL;
-    }
-    free(tobedel);
-    
+    printf("%d  ", node->data);
+    inorder_traversal(node->left);
+    inorder_traversal(node->right);
 }
 
-void traverse(){
-    struct node* ptr;
-    int nodeno=0;
-    for(ptr=front; ptr!=NULL; ptr=ptr->link,nodeno++){
-        printf("Node no.%d has info = %d \n", nodeno+1, ptr->info);
+void postorder_traversal(struct Node* node){
+    if( node == NULL ){
+        return;
     }
+    inorder_traversal(node->left);
+    inorder_traversal(node->right);
+    printf("%d  ", node->data);
 }
-int main(){
-    int flag=1,choice;
-    printf("Menu : \n");
-    do
-    {
-        printf("Enter the choice from menu: ");
+
+void main() {
+    int flag=1, choice;
+    printf("Menu: \n");
+    //example graph
+    struct Node* root = create_node(1);
+    root->left = create_node(2);
+    root->right = create_node(3);
+    root->left->left = create_node(4);
+    root->left->right = create_node(5);
+    do{
+        printf("\nEnter the choice from menu: ");
         scanf("%d",&choice);
         switch(choice){
-            case(1): Enqueue();break;
-            case(2): Dequeue();break;
-            case(3): traverse();break;
-            case(4): flag=0;break;
-            default: printf("Invalid choice.");
+            case(1): {inorder_traversal(root);break;}
+            case(2): {preorder_traversal(root);break;}
+            case(3): {postorder_traversal(root);break;}
+            case(4): {flag=0;break;}
+            default: {printf("Invalid choice.");break;}
         }
-    } while(flag==1);
-    
-    return 0;
+    }while(flag);
 }
