@@ -32,16 +32,16 @@ void preorder_traversal(struct Node* node){
         return;
     }
     printf("%d  ", node->data);
-    inorder_traversal(node->left);
-    inorder_traversal(node->right);
+    preorder_traversal(node->left);
+    preorder_traversal(node->right);
 }
 
 void postorder_traversal(struct Node* node){
     if( node == NULL ){
         return;
     }
-    inorder_traversal(node->left);
-    inorder_traversal(node->right);
+    postorder_traversal(node->left);
+    postorder_traversal(node->right);
     printf("%d  ", node->data);
 }
 
