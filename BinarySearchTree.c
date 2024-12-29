@@ -39,16 +39,16 @@ struct Node* find_min(struct Node* node) {
 }
 
 void delete_node(int data, struct Node** root){
-    if(*root == Null){
+    if(*root == NULL){
         // underflow condition
         printf("Underflow\n");
         return;
         // this is a test line
     }
     if (data < (*root)->data) {
-        delete_node(&(*root)->left, data);
+        delete_node(data, &(*root)->left);
     } else if (data > (*root)->data) {
-        delete_node(&(*root)->right, data);
+        delete_node(data, &(*root)->right);
     } else {
         // case for no children
         if ((*root)->left == NULL && (*root)->right == NULL) {
@@ -69,7 +69,7 @@ void delete_node(int data, struct Node** root){
         else {
             struct Node* temp = find_min((*root)->right);
             (*root)->data = temp->data;
-            delete_node(&(*root)->right, temp->data);
+            delete_node(temp->data, &(*root)->right);
         }
     }
 }
@@ -107,7 +107,7 @@ void main() {
             case(2): {
                 int data;
                 printf("Enter the data you want to Delete: ");
-                scanf("%d". &data);
+                scanf("%d", &data);
                 delete_node(data, &root);
                 break;
             }
