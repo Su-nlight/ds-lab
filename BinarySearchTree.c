@@ -83,32 +83,13 @@ void inorder_traversal(struct Node* node){
     inorder_traversal(node->right);
 }
 
-void preorder_traversal(struct Node* node){
-    if( node == NULL ){
-        return;
-    }
-    printf("%d  ", node->data);
-    preorder_traversal(node->left);
-    preorder_traversal(node->right);
-}
-
-void postorder_traversal(struct Node* node){
-    if( node == NULL ){
-        return;
-    }
-    postorder_traversal(node->left);
-    postorder_traversal(node->right);
-    printf("%d  ", node->data);
-}
-
 void main() {
     int flag=1, choice;
     printf("Menu: \n");
-    printf("1. insert to BST\n");
-    printf("2. inorder traversal\n");
-    printf("3. preorder traversal\n");
-    printf("4. postorder traversal\n");
-    printf("5. exit\n");
+    printf("1. Insert to BST\n");
+    printf("2. Delete from BST\n");
+    printf("3. inorder traversal\n");
+    printf("4. exit\n");
     //example graph
     struct Node* root = NULL;
     
@@ -121,11 +102,17 @@ void main() {
                 printf("Enter data you want to insert: ");
                 scanf("%d",&data);
                 insert_node(data, &root);
-                break;}
-            case(2): {inorder_traversal(root);break;}
-            case(3): {preorder_traversal(root);break;}
-            case(4): {postorder_traversal(root);break;}
-            case(5): {flag=0;break;}
+                break;
+            }
+            case(2): {
+                int data;
+                printf("Enter the data you want to Delete: ");
+                scanf("%d". &data);
+                delete_node(data, &root);
+                break;
+            }
+            case(3): {inorder_traversal(root);break;}
+            case(4): {flag=0;break;}
             default: {printf("Invalid choice.");break;}
         }
     }while(flag);
